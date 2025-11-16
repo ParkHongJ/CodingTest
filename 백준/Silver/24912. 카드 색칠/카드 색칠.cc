@@ -20,7 +20,6 @@ int dy[2] = { 1, 0 };
 
 void BackJoon()
 {
-	
 	cin.tie(NULL);
 	std::ios_base::sync_with_stdio(false);
 	
@@ -34,7 +33,6 @@ void BackJoon()
 		cin >> cards[i];
 	}
 
-	bool isAnswer = true;
 	for (int i = 0; i < N; i++)
 	{
 		if (cards[i] != 0)
@@ -62,11 +60,6 @@ void BackJoon()
 					break;
 				}
 			}
-			if (cards[i] == 0)
-			{
-				isAnswer = false; 
-				break;
-			}
 		}
 		else
 		{
@@ -86,7 +79,21 @@ void BackJoon()
 					break;
 				}
 			}
-			if (cards[i] == 0)
+		}
+	}
+
+	bool isAnswer = true;
+
+	for (int i = 0; i < N; i++)
+	{
+		if (cards[i] == 0)
+		{
+			isAnswer = false;
+			break;
+		}
+		if (i + 1 < N)
+		{
+			if (cards[i] == cards[i + 1])
 			{
 				isAnswer = false;
 				break;
