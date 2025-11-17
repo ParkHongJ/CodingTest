@@ -28,33 +28,39 @@ void BackJoon()
 	cin >> N;
 
 	vector<int> v(N);
+	vector<int> hol;
+	vector<int> jak;
 	for (int i = 0; i < N; ++i)
 	{
 		cin >> v[i];
+
+		if (i % 2 == 0)
+		{
+			hol.push_back(v[i]);
+		}
+		else
+		{
+			jak.push_back(v[i]);
+		}
 	}
 
-	while (true)
-	{
-		bool isChange = false;
-		for (int i = 1; i < N - 1; i++)
-		{
-			int left = v[i - 1];
-			int right = v[i + 1];
+	sort(hol.begin(), hol.end());
+	sort(jak.begin(), jak.end());
 
-			if (left > right)
-			{
-				v[i - 1] = right;
-				v[i + 1] = left;
-				isChange = true;
-			}
-		}
-		if (!isChange)
-		{
-			break;
-		}
+	int tmp = 0;
+	for (int i = 0; i < hol.size(); ++i, tmp += 2)
+	{
+		v[tmp] = hol[i];
+	}
+
+	tmp = 1;
+	for (int i = 0; i < jak.size(); ++i, tmp += 2)
+	{
+		v[tmp] = jak[i];
 	}
 
 	bool sorted = true;
+
 	for (int i = 1; i < N; ++i)
 	{
 		if (v[i] < v[i - 1])
@@ -63,6 +69,7 @@ void BackJoon()
 			break;
 		}
 	}
+
 	if (sorted)
 	{
 		cout << "YES" << '\n';
