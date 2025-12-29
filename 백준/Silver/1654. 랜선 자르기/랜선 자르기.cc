@@ -38,23 +38,17 @@ void BackJoon()
 	sort(ran.begin(), ran.end());
 
 	long high = tempsum / N;
-	long low = 0;
+	long low = 1;
 	long length = 0;
 
 	while (high >= low)
 	{
 		long cut = (high + low) / 2;
 		int num = 0;
-        if (cut == 0)
-        {
-            cout << 1 <<'\n';
-            return;
-        }
 		
 		for (int i = 0; i < ran.size(); ++i)
 		{
-            if (cut > 0)
-			    num += ran[i] / cut;
+            num += ran[i] / cut;
 		}
 
 		//필요한 개수를 넘었다
