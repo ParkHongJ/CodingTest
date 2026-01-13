@@ -23,7 +23,7 @@ void BackJoon()
 {
 	cin.tie(NULL);
 	std::ios_base::sync_with_stdio(false);
-	
+
 	/*
 	*	첫째 줄에 노드의 개수 N (2 ≤ N ≤ 100,000)이 주어진다. 
 		둘째 줄부터 N-1개의 줄에 트리 상에서 연결된 두 정점이 주어진다.
@@ -46,37 +46,34 @@ void BackJoon()
 	parent[1] = -1;
 
 	
-	for (int i = 1; i <= N; ++i)
+	queue<int> q;
+	q.push(1);
+
+	vector<bool> visit(N + 1);
+
+	while (!q.empty())
 	{
-		queue<int> q;
-		q.push(i);
+		int cur = q.front(); q.pop();
 
-		vector<bool> visit(N + 1);
+		if (visit[cur])
+			continue;
+		visit[cur] = true;
 
-		while (!q.empty())
+		for (int j = 0; j < Edges[cur].size(); ++j)
 		{
-			int cur = q.front(); q.pop();
-			
-			if (visit[cur])
+			int neighbor = Edges[cur][j];
+
+			if (parent[neighbor] != 0)
 				continue;
-			visit[cur] = true;
 
-			for (int j = 0; j < Edges[cur].size(); ++j)
+			if (parent[cur] != 0)
 			{
-				int neighbor = Edges[cur][j];
-				
-				if (parent[neighbor] != 0)
-					continue;
-
-				if (parent[cur] != 0)
-				{
-					parent[neighbor] = cur;
-				}
-				if (visit[neighbor])
-					continue;
-
-				q.push(neighbor);
+				parent[neighbor] = cur;
 			}
+			if (visit[neighbor])
+				continue;
+
+			q.push(neighbor);
 		}
 	}
 
